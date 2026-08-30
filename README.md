@@ -52,7 +52,7 @@ Tweets (API Twitter/X) ──► Limpieza y homologación ──► Modelo Híbr
 | Random Forest | 0.69 | 0.56 | 0.53 |
 | Transformer solo | 0.69 | 0.56 | 0.55 |
 
-El sistema de reglas contextuales **casi duplica el F1-Score del Transformer usado solo** (0.288 → 0.553), evidenciando el aporte del conocimiento del discurso político peruano. Detalle completo de metodología y resultados en la tesis (`docs/`).
+El sistema de reglas contextuales **casi duplica el F1-Score del Transformer usado solo** (0.288 → 0.553), evidenciando el aporte del conocimiento del discurso político peruano.
 
 ## Estructura del repositorio
 
@@ -66,8 +66,6 @@ El sistema de reglas contextuales **casi duplica el F1-Score del Transformer usa
 │   │   └── corpus_tweets_clasificado.xlsx   # 97,118 tweets (abril–mayo 2021) con salida del Modelo Híbrido
 │   └── gold_standard/
 │       └── gold_standard_200_tweets_etiquetado.xlsx  # 200 tweets etiquetados manualmente (validación)
-├── docs/
-│   └── tesis.docx                           # Documento completo de la tesis
 └── requirements.txt
 ```
 
