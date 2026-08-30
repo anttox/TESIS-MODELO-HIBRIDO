@@ -58,15 +58,20 @@ El sistema de reglas contextuales **casi duplica el F1-Score del Transformer usa
 
 ```
 ├── notebooks/
-│   ├── 01_generacion_gold_standard.ipynb   # Muestreo estratificado y armado del set de validación (200 tweets)
-│   └── 02_modelo_hibrido_clasificacion.ipynb  # Clasificador híbrido (Transformer + reglas) y construcción del IDSE
+│   ├── 01_generacion_gold_standard.ipynb    # Muestreo estratificado y armado del set de validación (200 tweets)
+│   ├── 02_modelo_hibrido_clasificacion.ipynb  # Clasificador híbrido (Transformer + reglas) y construcción del IDSE
+│   └── 03_comparacion_modelos.ipynb         # Evaluación comparativa: Híbrido vs. RF, SVM y Transformer solo (Tablas 8 y 9)
 ├── data/
-│   └── gold_standard/                      # Muestra etiquetada manualmente (200 tweets)
-├── docs/                                   # Tesis completa (PDF) y figuras/tablas de referencia
+│   ├── corpus/
+│   │   └── corpus_tweets_clasificado.xlsx   # 97,118 tweets (abril–mayo 2021) con salida del Modelo Híbrido
+│   └── gold_standard/
+│       └── gold_standard_200_tweets_etiquetado.xlsx  # 200 tweets etiquetados manualmente (validación)
+├── docs/
+│   └── tesis.docx                           # Documento completo de la tesis
 └── requirements.txt
 ```
 
-> **Nota sobre los datos:** el corpus completo (97,118 tweets, abril–mayo 2021) fue recolectado vía la API de Twitter/X con Tweepy. Por las políticas de uso de datos de la plataforma, este repositorio no redistribuye el contenido íntegro de los tweets; se comparte el **gold standard** de 200 tweets (usado como conjunto de validación) y el código completo para reproducir la recolección y el pipeline con tus propias credenciales de API.
+> **Nota sobre los datos:** el corpus fue recolectado vía la API de Twitter/X con Tweepy entre el 1 de abril y el 31 de mayo de 2021, y se comparte aquí con fines exclusivamente académicos y de reproducibilidad de esta investigación.
 
 ## Cómo reproducir
 
@@ -77,19 +82,10 @@ pip install -r requirements.txt
 jupyter notebook notebooks/
 ```
 
-- `01_generacion_gold_standard.ipynb`: parte de un dataset ya clasificado por el modelo y selecciona una muestra estratificada (clase × confianza × bloque temporal) para etiquetado humano.
+- `01_generacion_gold_standard.ipynb`: parte del corpus ya clasificado y selecciona una muestra estratificada (clase × confianza × bloque temporal) para etiquetado humano.
 - `02_modelo_hibrido_clasificacion.ipynb`: implementa `PeruvianSentimentClassifier`, la clase que combina el Transformer con el motor de reglas y produce las columnas de sentimiento (`sentimiento_economico`, `confianza_sentimiento`, `metodo_clasificacion`, etc.) sobre el corpus completo.
-
-**Dependencias principales:** `pandas`, `numpy`, `transformers`, `torch`, `scikit-learn`, `spaCy`, `tweepy`, `openpyxl`.
+- `03_comparacion_modelos.ipynb`: entrena y evalúa Random Forest y SVM (TF-IDF + embeddings FastText) sobre el gold standard, y compara los cuatro modelos tanto en clasificación de sentimiento como en predicción direccional del tipo de cambio.
 
 ## Metodología
 
 Diseño no experimental, longitudinal de series temporales, con alcance correlacional, siguiendo **CRISP-DM**. Corpus de 97,118 tweets válidos (61 días de observación, 1 abril –31 mayo 2021) cruzado con el tipo de cambio de compra USD/PEN oficial del BCRP. Validación mediante correlación de Pearson/Spearman/Kendall y clasificación binaria con `TimeSeriesSplit` para evitar fuga de información.
-
-## Citar este trabajo
-
-```
-Rojas Ramos, R. A. & Vilca Loayza, R. A. (2025). Predicción de la direccionalidad del tipo de
-cambio USD/PEN mediante análisis de sentimiento en Twitter/X durante elecciones en Perú
-[Tesis de pregrado]. Facultad de Ciencias e Ingeniería.
-```
