@@ -1,0 +1,9 @@
+pandas
+numpy
+openpyxl
+scipy
+scikit-learn
+gensim
+matplotlib
+torch
+transformers
