@@ -88,4 +88,4 @@ jupyter notebook notebooks/
 
 ## Metodología
 
-Diseño no experimental, longitudinal de series temporales, con alcance correlacional, siguiendo **CRISP-DM**. Corpus de 97,118 tweets válidos (61 días de observación, 1 abril–31 mayo 2021) cruzado con el tipo de cambio de compra USD/PEN oficial del BCRP. Validación mediante correlación de Pearson/Spearman/Kendall y clasificación binaria con `TimeSeriesSplit` para evitar fuga de información.
+Diseño no experimental, longitudinal de series temporales, con alcance correlacional, siguiendo **CRISP-DM**. Corpus de 97,118 tweets válidos (61 días de observación, 1 abril –31 mayo 2021) cruzado con el tipo de cambio de compra USD/PEN oficial del BCRP. Validación mediante correlación de Pearson/Spearman/Kendall y clasificación binaria con `TimeSeriesSplit` para evitar fuga de información.
