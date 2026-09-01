@@ -31,14 +31,14 @@ Tweets (API Twitter/X) ──► Limpieza y homologación ──► Modelo Híbr
 ## Resultados clave
 
 **Correlación más fuerte** entre sentimiento y tipo de cambio (media móvil 7 días, *lead* 1 día):
-*Tabla 4 de la tesis — Sección 13.3.1*
 
 | Predictor | r (Pearson) | p-valor |
 |---|---|---|
 | `ratio_pos_neg_ma_7` | **−0.627** | < 0.001 |
 
+> ⚠️ El notebook que agrega el sentimiento diario y calcula esta correlación no forma parte todavía de este repositorio.
+
 **Clasificación de sentimiento político** (gold standard de 200 tweets etiquetados manualmente):
-*Tabla 8 de la tesis — Sección 14.1.1*
 
 | Modelo | Exactitud | F1-Score |
 |---|---|---|
@@ -47,8 +47,9 @@ Tweets (API Twitter/X) ──► Limpieza y homologación ──► Modelo Híbr
 | SVM | 0.485 | 0.480 |
 | Transformer solo (sin reglas) | 0.390 | 0.288 |
 
+**Código:** [`notebooks/03_comparacion_modelos.ipynb`](notebooks/03_comparacion_modelos.ipynb) — celda "PARTE 1". Carga el gold standard (200 tweets con etiqueta humana) y representa cada tweet combinando TF-IDF (5000 dim) con embeddings FastText en español (300 dim); con esa representación entrena Random Forest y SVM usando solo esos 200 tweets (validación cruzada de 5 particiones), corre el Transformer solo por inferencia directa, y toma la salida ya calculada del Modelo Híbrido. Compara los cuatro contra la etiqueta humana con exactitud, precisión, recall y F1.
+
 **Predicción direccional del tipo de cambio** (validación fuera de muestra, `TimeSeriesSplit`, línea base = 69%):
-*Tabla 9 de la tesis — Sección 14.1.2*
 
 | Modelo | Exactitud | F1-Score | AUC-ROC |
 |---|---|---|---|
@@ -56,6 +57,8 @@ Tweets (API Twitter/X) ──► Limpieza y homologación ──► Modelo Híbr
 | **Modelo Híbrido** | **0.78** | 0.76 | 0.71 |
 | Random Forest | 0.69 | 0.56 | 0.53 |
 | Transformer solo | 0.69 | 0.56 | 0.55 |
+
+**Código:** [`notebooks/03_comparacion_modelos.ipynb`](notebooks/03_comparacion_modelos.ipynb) — celda "PARTE 2 (CORREGIDA)". Aplica por inferencia (sin reentrenar) los modelos RF y SVM guardados en la Parte 1, y el Transformer solo, sobre los 97,118 tweets del corpus; agrega el sentimiento a un índice diario con media móvil de 7 días y, con `TimeSeriesSplit`, busca el umbral de decisión (sube/baja) usando solo los datos de entrenamiento de cada partición temporal para evitar fuga de información, evaluando después en los días de prueba que esa búsqueda nunca vio.
 
 El sistema de reglas contextuales **casi duplica el F1-Score del Transformer usado solo** (0.288 → 0.553), evidenciando el aporte del conocimiento del discurso político peruano.
 
