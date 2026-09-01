@@ -7,9 +7,11 @@
 
 Código reproducible de la tesis **"Predicción de la direccionalidad del tipo de cambio USD/PEN mediante análisis de sentimiento en Twitter/X durante elecciones en Perú"** (elecciones presidenciales 2021), presentada para optar el título de Ingeniero Informático.
 
-> **Autores:** Ruben Anderson Rojas Ramos · Renzo Antonio Vilca Loayza
-> **Asesores:** Nelson Enrique Castro Zarate · Roy Marco Yali Samaniego
-> Lima, Perú — 2025
+| | |
+|---|---|
+| **Autores** | Ruben Anderson Rojas Ramos&nbsp;&nbsp;·&nbsp;&nbsp;Renzo Antonio Vilca Loayza |
+| **Asesores** | Nelson Enrique Castro Zárate&nbsp;&nbsp;·&nbsp;&nbsp;Roy Marco Yali Samaniego |
+| **Lugar y año** | Lima, Perú — 2025 |
 
 ## ¿Qué hace este proyecto?
 
@@ -29,12 +31,14 @@ Tweets (API Twitter/X) ──► Limpieza y homologación ──► Modelo Híbr
 ## Resultados clave
 
 **Correlación más fuerte** entre sentimiento y tipo de cambio (media móvil 7 días, *lead* 1 día):
+*Tabla 4 de la tesis — Sección 13.3.1*
 
 | Predictor | r (Pearson) | p-valor |
 |---|---|---|
 | `ratio_pos_neg_ma_7` | **−0.627** | < 0.001 |
 
 **Clasificación de sentimiento político** (gold standard de 200 tweets etiquetados manualmente):
+*Tabla 8 de la tesis — Sección 14.1.1*
 
 | Modelo | Exactitud | F1-Score |
 |---|---|---|
@@ -44,6 +48,7 @@ Tweets (API Twitter/X) ──► Limpieza y homologación ──► Modelo Híbr
 | Transformer solo (sin reglas) | 0.390 | 0.288 |
 
 **Predicción direccional del tipo de cambio** (validación fuera de muestra, `TimeSeriesSplit`, línea base = 69%):
+*Tabla 9 de la tesis — Sección 14.1.2*
 
 | Modelo | Exactitud | F1-Score | AUC-ROC |
 |---|---|---|---|
