@@ -36,8 +36,6 @@ Tweets (API Twitter/X) ──► Limpieza y homologación ──► Modelo Híbr
 |---|---|---|
 | `ratio_pos_neg_ma_7` | **−0.627** | < 0.001 |
 
-> ⚠️ El notebook que agrega el sentimiento diario y calcula esta correlación no forma parte todavía de este repositorio.
-
 **Clasificación de sentimiento político** (gold standard de 200 tweets etiquetados manualmente):
 
 | Modelo | Exactitud | F1-Score |
